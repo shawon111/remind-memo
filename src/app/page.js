@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import HomeHero from "@/components/Home/HomeHero";
 
@@ -7,6 +8,7 @@ export default function Home() {
       <div className="gradient-container">
         <Header />
         <HomeHero />
+        <Footer />
       </div>
     </div>
   );
