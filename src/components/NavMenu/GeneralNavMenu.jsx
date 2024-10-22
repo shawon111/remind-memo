@@ -45,15 +45,13 @@ const GeneralNavMenu = () => {
         <NavigationMenu>
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <Link href="/" passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Home
-                        </NavigationMenuLink>
+                    <Link className="dark-text text-base font-semibold space-grotesk" href="/" passHref>
+                        Home
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>
-                        <Link href="/reminders">Reminders</Link>
+                        <Link className="dark-text text-base font-semibold space-grotesk" href="/reminders">Reminders</Link>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -70,10 +68,8 @@ const GeneralNavMenu = () => {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/contact" passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Contact
-                        </NavigationMenuLink>
+                    <Link className="dark-text text-base font-semibold space-grotesk" href="/contact" passHref>
+                        Contact
                     </Link>
                 </NavigationMenuItem>
             </NavigationMenuList>
@@ -85,7 +81,7 @@ const ListItem = React.forwardRef(({ className, title, children, ...props }, ref
     return (
         <li>
             <NavigationMenuLink asChild>
-                <a
+                <Link
                     ref={ref}
                     className={cn(
                         "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
@@ -93,11 +89,11 @@ const ListItem = React.forwardRef(({ className, title, children, ...props }, ref
                     )}
                     {...props}
                 >
-                    <div className="text-sm font-medium leading-none">{title}</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                    <div className="text-base font-semibold leading-none">{title}</div>
+                    <p className="line-clamp-2 text-base leading-snug tajawal font-normal text-muted-foreground">
                         {children}
                     </p>
-                </a>
+                </Link>
             </NavigationMenuLink>
         </li>
     )

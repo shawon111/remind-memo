@@ -1,9 +1,7 @@
 import {
     NavigationMenu,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
-    navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import Link from "next/link";
 
@@ -12,11 +10,9 @@ const DashboardNavMenu = () => {
         <NavigationMenu>
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    {/* <Link href="/" passHref> */}
-                        <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
-                            Home
-                        </NavigationMenuLink>
-                    {/* </Link> */}
+                    <Link className="dark-text text-base font-semibold space-grotesk" href="/" passHref>
+                        Home
+                    </Link>
                 </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>

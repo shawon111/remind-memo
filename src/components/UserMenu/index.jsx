@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "../ui/button";
 
 const UserMenu = () => {
     const isLoggedIn = true;
@@ -7,10 +6,10 @@ const UserMenu = () => {
         <div>
             <div>
                 {
-                    isLoggedIn ? <Link href="/dashboard">
-                        <Button>Dashboard</Button>
-                    </Link> : <Link href="/login">
-                        <Button>SignUp/SignIn</Button>
+                    isLoggedIn ? <Link className="p-0 brand-bg hover:brightness-110 flex justify-center items-center h-[40px] w-[140px] rounded-[50px]" href="/dashboard">
+                        <span className="text-sm uppercase text-white font-semibold">Dashboard</span>
+                    </Link> : <Link className="p-0 brand-bg hover:brightness-110 flex justify-center items-center h-[40px] w-[140px] rounded-[50px]" href="/login">
+                        <span className="text-sm uppercase text-white font-semibold">SignUp/SignIn</span>
                     </Link>
                 }
             </div>
