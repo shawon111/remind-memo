@@ -8,8 +8,8 @@ export default function Home() {
       <div className="gradient-container">
         <Header />
         <HomeHero />
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }
