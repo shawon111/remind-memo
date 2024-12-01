@@ -1,5 +1,4 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import DashboardSidebar from "@/components/Dashboard/DashboardSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 const DashboardLayout = ({ children }) => {
@@ -11,7 +10,7 @@ const DashboardLayout = ({ children }) => {
                     <div>
                         <SidebarTrigger />
                     </div>
-                    <div>
+                    <div className="pt-5">
                         {children}
                     </div>
                 </main>

@@ -22,12 +22,11 @@ const data = {
   navMain: [
     {
       name: 'Dashboard',
-      url: '/dashboard',
       icon: <FaHome />,
       submenu: [
         {
           name: 'Overview',
-          url: '/dashboard/overview',
+          url: '/dashboard',
         },
         {
           name: 'Analytics',
@@ -37,7 +36,6 @@ const data = {
     },
     {
       name: 'Create',
-      url: '/create',
       icon: <FaPlus />,
       submenu: [
         {
@@ -52,9 +50,12 @@ const data = {
     },
     {
       name: 'Reminders',
-      url: '/reminders',
       icon: <FaBell />,
       submenu: [
+        {
+          name: 'All',
+          url: '/reminders',
+        },
         {
           name: 'Upcoming',
           url: '/reminders/upcoming',
@@ -67,12 +68,11 @@ const data = {
     },
     {
       name: 'Templates',
-      url: '/templates',
       icon: <FaFileAlt />,
       submenu: [
         {
           name: 'Manage Templates',
-          url: '/templates/manage',
+          url: '/templates',
         },
         {
           name: 'Create Template',
@@ -87,7 +87,7 @@ export function AppSidebar({
   ...props
 }) {
   return (
-    (<Sidebar {...props}>
+    (<Sidebar className="dark-bg" {...props}>
       <SidebarHeader>
         <VersionSwitcher />
       </SidebarHeader>
@@ -96,7 +96,7 @@ export function AppSidebar({
         {data.navMain.map((item) => (
           <SidebarGroup key={item.name}>
             <SidebarGroupLabel>
-              <div className="flex gap-x-1 items-center dark-text">
+              <div className="flex gap-x-1 items-center brand-text">
                 <span className="text-sm">{item.icon}</span>
                 <span className="text-sm">{item.name}</span>
               </div>
@@ -106,8 +106,8 @@ export function AppSidebar({
                 {item.submenu.map((item) => (
                   <SidebarMenuItem key={item.name}>
                     <SidebarMenuButton asChild isActive={item.isActive}>
-                      <div>
-                        <Link className="text-sm dark-text tajawal" href={item.url}>{item.name}</Link>
+                      <div className="text-white hover:text-[#213a57]">
+                        <Link className="text-sm tajawal w-full" href={item.url}>{item.name}</Link>
                       </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

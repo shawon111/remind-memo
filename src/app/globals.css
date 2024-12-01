@@ -101,6 +101,7 @@ body {
 body {
   --brand-color: #45dfb1;
   --dark-color: #213a57;
+  --secondary-color: #ef476f;
 }
 
 /* colors */
@@ -112,12 +113,20 @@ body {
   background-color: var(--dark-color);
 }
 
+.secondary-bg {
+  background-color: var(--secondary-color);
+}
+
 .brand-text {
   color: var(--brand-color);
 }
 
 .dark-text {
   color: var(--dark-color);
+}
+
+.secondary-text {
+  color: var(--secondary-color);
 }
 
 /* font families */
