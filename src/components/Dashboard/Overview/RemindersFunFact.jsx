@@ -45,7 +45,7 @@ const RemindersFunFact = () => {
                 }}
                 plugins={[plugin.current]}
                 orientation="vertical"
-                className="w-full max-w-xs"
+                className="w-full"
             >
                 <CarouselContent className="-mt-1 h-[200px]">
                     {funFacts.map((item, index) => (
