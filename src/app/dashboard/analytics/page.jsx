@@ -1,18 +1,18 @@
+import OneYearReminderChart from "@/components/Dashboard/Analytics/OneYearReminderChart";
+import ReminderTypesChart from "@/components/Dashboard/Analytics/ReminderTypesChart";
 import OverviewStats from "@/components/Dashboard/Overview/OverviewStats";
-import RemindersCalenderView from "@/components/Dashboard/Overview/RemindersCalenderView";
-import UpcomingReminders from "@/components/Dashboard/Overview/UpcomingReminders";
 
-const Dashboard = () => {
+const page = () => {
     return (
         <div>
             <OverviewStats />
             <section>
                 <div className="flex items-start justify-between flex-wrap pt-10 gap-y-3">
                     <div className="w-full lg:w-[60%]">
-                        <UpcomingReminders />
+                        <OneYearReminderChart />
                     </div>
                     <div className="w-full lg:w-[38%]">
-                        <RemindersCalenderView />
+                        <ReminderTypesChart />
                     </div>
                 </div>
             </section>
@@ -20,4 +20,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default page;

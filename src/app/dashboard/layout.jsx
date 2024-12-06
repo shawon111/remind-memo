@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import DashboardQuickActions from "@/components/Dashboard/Overview/DashboardQuickActions";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 const DashboardLayout = ({ children }) => {
@@ -11,6 +12,7 @@ const DashboardLayout = ({ children }) => {
                         <SidebarTrigger />
                     </div>
                     <div className="pt-5">
+                        <DashboardQuickActions />
                         {children}
                     </div>
                 </main>
