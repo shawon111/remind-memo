@@ -13,7 +13,7 @@ export const metadata = {
 // fonts
 const tajawal = Tajawal({
   weight: ['400', '500', '700'],
-  subsets: ['latin'], 
+  subsets: ['latin'],
   variable: '--font-tajawal'
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body className={`${tajawal.className} ${spaceGrotesk.className}`} >
-        {children}
+          {children}
       </body>
     </html>
   );
