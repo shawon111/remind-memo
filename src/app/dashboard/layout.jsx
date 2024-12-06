@@ -8,14 +8,14 @@ const DashboardLayout = ({ children }) => {
         <div>
             <ThemeProvider
                 attribute="class"
-                defaultTheme="system"
+                defaultTheme="dark"
                 enableSystem
                 disableTransitionOnChange
             >
                 <div>
                     <SidebarProvider className="mark-provider">
                         <AppSidebar />
-                        <main className="w-full p-[10px] lg:px-[20px] py-[10px]">
+                        <main className="w-full p-[10px] lg:px-[20px] pt-[15px] pb-2">
                             <div>
                                 <SidebarTrigger />
                             </div>

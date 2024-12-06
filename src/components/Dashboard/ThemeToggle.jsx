@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 
 const ThemeToggle = () => {
     const { theme, systemTheme, setTheme } = useTheme();
-    console.log(theme)
     const handleThemeChange = () => {
         if (theme) {
             if (theme === "system") {

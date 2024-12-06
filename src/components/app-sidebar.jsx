@@ -87,37 +87,39 @@ export function AppSidebar({
   ...props
 }) {
   return (
-    (<Sidebar className="dark-bg" {...props}>
-      <SidebarHeader>
-        <VersionSwitcher />
-      </SidebarHeader>
-      <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.name}>
-            <SidebarGroupLabel>
-              <div className="flex gap-x-1 items-center brand-text">
-                <span className="text-sm">{item.icon}</span>
-                <span className="text-sm">{item.name}</span>
-              </div>
-            </SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {item.submenu.map((item) => (
-                  <SidebarMenuItem key={item.name}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <div className="text-white hover:text-[#213a57]">
-                        <Link className="text-sm tajawal w-full" href={item.url}>{item.name}</Link>
-                      </div>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
-      </SidebarContent>
-      <SidebarRail />
+    (<Sidebar {...props} className="border-0 pt-2 ps-2">
+      <div className="border rounded-xl">
+        <SidebarHeader>
+          <VersionSwitcher />
+        </SidebarHeader>
+        <SidebarContent>
+          {/* We create a SidebarGroup for each parent. */}
+          {data.navMain.map((item) => (
+            <SidebarGroup key={item.name}>
+              <SidebarGroupLabel>
+                <div className="flex gap-x-1 items-center brand-text">
+                  <span className="text-sm">{item.icon}</span>
+                  <span className="text-sm">{item.name}</span>
+                </div>
+              </SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {item.submenu.map((item) => (
+                    <SidebarMenuItem key={item.name}>
+                      <SidebarMenuButton asChild isActive={item.isActive}>
+                        <div>
+                          <Link className="text-sm tajawal w-full" href={item.url}>{item.name}</Link>
+                        </div>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))}
+        </SidebarContent>
+        <SidebarRail />
+      </div>
     </Sidebar>)
   );
 }
