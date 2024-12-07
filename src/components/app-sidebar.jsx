@@ -88,7 +88,7 @@ export function AppSidebar({
 }) {
   return (
     (<Sidebar {...props} className="border-0 pt-2 ps-2">
-      <div className="border rounded-xl">
+      <div className="md:border md:rounded-xl h-full">
         <SidebarHeader>
           <VersionSwitcher />
         </SidebarHeader>
