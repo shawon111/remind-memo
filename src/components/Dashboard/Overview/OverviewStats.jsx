@@ -25,8 +25,9 @@ const OverviewStats = () => {
                 </div>
                 <div className="w-full md:w-[49%] lg:w-[24%]">
                     <StatCard data={{
-                        title: "Missed Reminders",
-                        count: 1
+                        title: "Reminder Limits",
+                        count: 10,
+                        limit:15
                     }} />
                 </div>
             </div>

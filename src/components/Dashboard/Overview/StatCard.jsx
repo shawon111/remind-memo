@@ -6,12 +6,14 @@ import {
 } from "@/components/ui/card"
 
 export default function StatCard({data}) {
-    const {title, count} = data;
+    const {title, count, limit} = data;
   return (
     <Card>
       <CardHeader className="pb-6">
         <CardDescription className="tajawal">{title}</CardDescription>
-        <CardTitle className="text-4xl">{count}</CardTitle>
+        {
+          limit? <CardTitle className="text-4xl">{count}<span className="text-base brand-text"> / {limit}</span></CardTitle> : <CardTitle className="text-4xl">{count}</CardTitle>
+        }
       </CardHeader>
     </Card>
   )
