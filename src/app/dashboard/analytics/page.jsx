@@ -1,4 +1,5 @@
 import CelebratedEvents from "@/components/Dashboard/Analytics/CelebratedEvents";
+import MissedReminders from "@/components/Dashboard/Analytics/MissedReminders";
 import OneYearReminderChart from "@/components/Dashboard/Analytics/OneYearReminderChart";
 import ReminderTypesChart from "@/components/Dashboard/Analytics/ReminderTypesChart";
 import OverviewStats from "@/components/Dashboard/Overview/OverviewStats";
@@ -23,7 +24,7 @@ const page = () => {
                         <CelebratedEvents />
                     </div>
                     <div className="w-full lg:w-[49%]">
-
+                        <MissedReminders />
                     </div>
                 </div>
             </section>
