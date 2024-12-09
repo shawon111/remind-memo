@@ -40,11 +40,11 @@ const data = {
       submenu: [
         {
           name: 'New Reminder',
-          url: '/create/reminder',
+          url: '/dashboard/reminder/create',
         },
         {
           name: 'New Template',
-          url: '/create/template',
+          url: '/dashboard/template/create',
         },
       ],
     },
@@ -54,15 +54,15 @@ const data = {
       submenu: [
         {
           name: 'All',
-          url: '/reminders',
+          url: '/dashboard/reminders',
         },
         {
           name: 'Upcoming',
-          url: '/reminders/upcoming',
+          url: '/dashboard/reminders/upcoming',
         },
         {
           name: 'Past',
-          url: '/reminders/past',
+          url: '/dashboard/reminders/past',
         },
       ],
     },
@@ -72,11 +72,11 @@ const data = {
       submenu: [
         {
           name: 'Manage Templates',
-          url: '/templates',
+          url: '/dashboard/templates',
         },
         {
-          name: 'Create Template',
-          url: '/templates/create',
+          name: 'Explore Templates',
+          url: '/dashboard/templates/explore',
         },
       ],
     },
