@@ -10,7 +10,7 @@ const HomeHero = () => {
     ]
 
     return (
-        <section className="bg-white py-[90px]">
+        <section className="py-[90px] min-h-[calc(100vh-174px)] flex items-center">
             <div className="container mx-auto">
                 <div>
                     <div>

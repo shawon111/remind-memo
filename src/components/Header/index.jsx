@@ -4,7 +4,7 @@ import UserMenu from '../UserMenu';
 
 const Header = () => {
     return (
-        <header className='py-[25px] bg-white'>
+        <header className='py-[25px]'>
             <div className='container mx-auto'>
                 <div className="flex gap-5 items-center">
                     <div className='w-3/12 flex justify-start'>

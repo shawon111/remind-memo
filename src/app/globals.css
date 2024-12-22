@@ -191,6 +191,9 @@ button {
 }
 
 /* header */
+.gradient-container {
+  background: linear-gradient(90deg, rgba(69, 223, 177, 0.259) 0%, rgba(239, 71, 110, 0.042) 50%);
+}
 
 /* dashboard */
 .fun-fact-text {

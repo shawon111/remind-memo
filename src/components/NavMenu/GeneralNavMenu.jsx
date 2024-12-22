@@ -50,7 +50,7 @@ const GeneralNavMenu = () => {
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>
+                    <NavigationMenuTrigger className="bg-[#fff0]">
                         <Link className="dark-text text-base font-semibold space-grotesk" href="/reminders">Reminders</Link>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
