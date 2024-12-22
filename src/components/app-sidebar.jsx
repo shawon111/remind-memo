@@ -16,8 +16,7 @@ import {
 } from "@/components/ui/sidebar"
 import Link from "next/link";
 
-// This is sample data.
-const data = {
+const menuData = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
@@ -41,11 +40,7 @@ const data = {
         {
           name: 'New Reminder',
           url: '/dashboard/reminder/create',
-        },
-        {
-          name: 'New Template',
-          url: '/dashboard/template/create',
-        },
+        }
       ],
     },
     {
@@ -71,13 +66,9 @@ const data = {
       icon: <FaFileAlt />,
       submenu: [
         {
-          name: 'Manage Templates',
-          url: '/dashboard/templates',
-        },
-        {
           name: 'Explore Templates',
-          url: '/dashboard/templates/explore',
-        },
+          url: '/dashboard/templates',
+        }
       ],
     },
   ],
@@ -94,7 +85,7 @@ export function AppSidebar({
         </SidebarHeader>
         <SidebarContent>
           {/* We create a SidebarGroup for each parent. */}
-          {data.navMain.map((item) => (
+          {menuData.navMain.map((item) => (
             <SidebarGroup key={item.name}>
               <SidebarGroupLabel>
                 <div className="flex gap-x-1 items-center brand-text">

@@ -4,7 +4,7 @@ import OneYearReminderChart from "@/components/Dashboard/Analytics/OneYearRemind
 import ReminderTypesChart from "@/components/Dashboard/Analytics/ReminderTypesChart";
 import OverviewStats from "@/components/Dashboard/Overview/OverviewStats";
 
-const page = () => {
+const Analytics = () => {
     return (
         <div>
             <OverviewStats />
@@ -32,4 +32,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Analytics;

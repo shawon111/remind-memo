@@ -1,6 +1,6 @@
 import { ReminderCard } from "@/components/Dashboard/Reminders/ReminderCard";
 
-const page = () => {
+const Reminders = () => {
     const reminders = [
         {
             title: "Joe's birthday",
@@ -87,4 +87,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Reminders;
