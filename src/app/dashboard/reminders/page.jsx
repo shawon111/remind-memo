@@ -11,7 +11,7 @@ const page = () => {
             is_recurring: "true",
             is_celebrated: "false",
             frequency: "yearly",
-            status: "pending",
+            status: "enabled",
             notifications: [
                 {
                     date: "01-05-2025",
@@ -36,7 +36,7 @@ const page = () => {
             is_recurring: "true",
             is_celebrated: "false",
             frequency: "yearly",
-            status: "pending",
+            status: "disabled",
             notifications: [
                 {
                     date: "01-07-2025",
@@ -61,7 +61,7 @@ const page = () => {
             is_recurring: "false",
             is_celebrated: "false",
             frequency: null,
-            status: "pending",
+            status: "enabled",
             notifications: [
                 {
                     date: "01-08-2025",

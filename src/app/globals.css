@@ -203,6 +203,10 @@ button {
   color: transparent;
 }
 
+.dashboard-calendar .\[\&\:has\(\[aria-selected\]\)\]\:bg-accent:has([aria-selected]) {
+  background-color: transparent;
+}
+
 /* footer */
 .social-icon svg {
   transition: all .3s;

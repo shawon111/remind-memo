@@ -10,7 +10,7 @@ const RemindersCalenderView = () => {
                 mode="single"
                 selected={date}
                 onSelect={setDate}
-                className="rounded-md border shadow w-full"
+                className="rounded-md border shadow w-full dashboard-calendar"
                 classNames={{
                     months:
                         "flex w-full flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 flex-1",

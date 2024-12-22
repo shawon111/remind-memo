@@ -23,14 +23,14 @@ export function ReminderCard({ className, reminder }) {
                         <CardTitle className="capitalize">{reminder_type}</CardTitle>
                         <CardDescription className="capitalize">{title}</CardDescription>
                     </div>
-                    <Badge>{status}</Badge>
+                    <Badge variant={status === "enabled" ? "" : "destructive"}>{status}</Badge>
                 </CardHeader>
                 <CardContent className="grid gap-4">
                     <div className=" flex items-center space-x-4 rounded-md border p-4">
                         <BellRing />
                         <div className="flex-1 space-y-1">
                             <p className="text-sm font-medium leading-none">
-                                Enable Reminder
+                                Toggle Reminder
                             </p>
                             <p className="text-sm text-muted-foreground">
                                 Enable to get notifications.
@@ -42,16 +42,21 @@ export function ReminderCard({ className, reminder }) {
                         {notifications.map((notification, index) => (
                             <div
                                 key={index}
-                                className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
+                                className="mb-6 last:mb-0 flex items-center justify-between"
                             >
-                                <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-                                <div className="space-y-1">
-                                    <p className="text-sm font-medium leading-none">
-                                        Notification {index + 1}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        {notification.description}
-                                    </p>
+                                <div className="grid grid-cols-[25px_1fr] items-start">
+                                    <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
+                                    <div className="space-y-1">
+                                        <p className="text-sm font-medium leading-none">
+                                            Notification {index + 1}
+                                        </p>
+                                        <p className="text-sm text-muted-foreground">
+                                            {notification?.date}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <Badge variant="outlined">{notification?.status}</Badge>
                                 </div>
                             </div>
                         ))}
