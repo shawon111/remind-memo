@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { ChartNoAxesCombined, LayoutPanelTop, Plus } from 'lucide-react';
+import { BellRing, ChartNoAxesCombined, Plus } from 'lucide-react';
 import React from 'react';
 import ThemeToggle from '../ThemeToggle';
 
@@ -17,7 +17,7 @@ const DashboardQuickActions = () => {
                 </div>
                 <div className='flex items-center justify-start gap-3 flex-wrap'>
                     <Button>
-                        Templates <LayoutPanelTop />
+                        Reminders <BellRing />
                     </Button>
                     <ThemeToggle />
                 </div>

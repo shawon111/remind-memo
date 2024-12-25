@@ -60,17 +60,7 @@ const menuData = {
           url: '/dashboard/reminders/past',
         },
       ],
-    },
-    {
-      name: 'Templates',
-      icon: <FaFileAlt />,
-      submenu: [
-        {
-          name: 'Explore Templates',
-          url: '/dashboard/templates',
-        }
-      ],
-    },
+    }
   ],
 }
 
