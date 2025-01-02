@@ -39,7 +39,7 @@ const menuData = {
       submenu: [
         {
           name: 'New Reminder',
-          url: '/dashboard/reminder/create',
+          url: '/dashboard/reminders/create',
         }
       ],
     },
