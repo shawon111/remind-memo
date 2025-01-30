@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { Tajawal, Space_Grotesk } from "next/font/google"
 
@@ -26,9 +27,9 @@ const spaceGrotesk = Space_Grotesk({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-
       <body className={`${tajawal.className} ${spaceGrotesk.className}`} >
-          {children}
+        <Toaster />
+        {children}
       </body>
     </html>
   );
