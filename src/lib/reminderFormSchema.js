@@ -6,15 +6,13 @@ export const reminderSchema = z.object({
 }),
   reminder_title: z.string().nonempty('Reminder title is required'),
   description: z.string().default(''),
-  how_to_celebrate: z.string().nonempty('How to celebrate is required'),
+  how_to_celebrate: z.string().default(''),
   event_date: z.date({
     required_error: 'Event date is required',
     invalid_type_error: 'Invalid date format',
   }),
   is_recurring: z.boolean().default(false),
-  frequency: z.enum(['weekly', 'monthly', 'yearly']).refine((val) => val !== "", {
-    message: "Frequency is required",
-}),
+  // frequency needed in server 
   status: z.enum(['enabled', 'disabled']).refine((val) => val !== "", {
     message: "Status is required",
 }),

@@ -22,34 +22,33 @@ import { format } from "date-fns";
 const CreateReminderCard = () => {
 
     const { toast } = useToast();
-
-    const [notification, setNotification] = useState({});
+    const [notification, setNotification] = useState({status: 'pending'});
     const [notifications, setNotifications] = useState([]);
 
     const { register, setValue, watch, handleSubmit, trigger, formState: { errors } } = useForm({
         resolver: zodResolver(reminderSchema),
-        defaultValues: {
-            notifications: [
-                {
-                    notification_type: 'email',
-                    date: new Date(),
-                    message: '',
-                    status: 'pending',
-                },
-            ],
-        },
     });
 
     const saveNotification = () => {
-        setNotifications([...notifications, notification]);
-        setNotification({});
-        toast({
-            description: "Notification added successfully.",
-        })
+        if (!notification.date || !notification.notification_type || !notification.message) {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! fill all the fields to save the notification.",
+            })
+            return;
+        } else {
+            setNotifications([...notifications, notification]);
+            setNotification({status: 'pending'});
+            toast({
+                description: "Notification added successfully.",
+            })
+        }
     };
 
     useEffect(() => {
-        setValue("notifications", notifications);
+        if (notifications.length > 0) {
+            setValue("notifications", notifications);
+        }
         console.log("Notifications:", notifications);
     }, [notifications]);
 
@@ -139,24 +138,6 @@ const CreateReminderCard = () => {
                                 <div className="flex justify-between gap-4">
                                     <div className="w-full">
                                         <Select
-                                            value={watch("frequency")}
-                                            onValueChange={(value) => setValue("frequency", value)}
-                                            className="w-full">
-                                            <SelectTrigger className="">
-                                                <SelectValue placeholder="Frequency" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Frequency</SelectLabel>
-                                                    <SelectItem value="weekly">weekly</SelectItem>
-                                                    <SelectItem value="monthly">monthly</SelectItem>
-                                                    <SelectItem value="yearly">yearly</SelectItem>
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
-                                    <div className="w-full">
-                                        <Select
                                             value={watch("status")}
                                             onValueChange={(value) => setValue("status", value)}
                                             className="w-full">
@@ -172,13 +153,6 @@ const CreateReminderCard = () => {
                                             </SelectContent>
                                         </Select>
                                     </div>
-                                </div>
-                                <div className="flex justify-between gap-4">
-                                    <div className="w-full">
-
-                                    </div>
-                                </div>
-                                <div className="flex justify-between gap-4">
                                     <div className="w-full">
                                         <Popover>
                                             <PopoverTrigger asChild>
@@ -187,9 +161,9 @@ const CreateReminderCard = () => {
                                             <PopoverContent className="w-80">
                                                 <div className="grid gap-4">
                                                     <div className="space-y-2">
-                                                        <h4 className="font-medium leading-none">Notification 1</h4>
+                                                        <h4 className="font-medium leading-none text-muted-foreground">Set a notofication for the reminder.</h4>
                                                         <p className="text-sm text-muted-foreground">
-                                                            Set a notofication for the reminder.
+
                                                         </p>
                                                     </div>
                                                     <div className="grid gap-2">
@@ -241,25 +215,6 @@ const CreateReminderCard = () => {
                                                             <Label htmlFor="height">Message</Label>
                                                             <Textarea onChange={(e) => setNotification({ ...notification, message: e.target.value })} placeholder="Notification Message" />
                                                         </div>
-                                                        <div className="grid grid-cols-2 items-center gap-4">
-                                                            <Label htmlFor="maxHeight">Status</Label>
-                                                            <Select
-                                                                value={notification?.status}
-                                                                onValueChange={(value) => setNotification({ ...notification, status: value })}
-                                                                className="w-full">
-                                                                <SelectTrigger className="">
-                                                                    <SelectValue placeholder="Status" />
-                                                                </SelectTrigger>
-                                                                <SelectContent>
-                                                                    <SelectGroup>
-                                                                        <SelectLabel>Status</SelectLabel>
-                                                                        <SelectItem value="sent">Sent</SelectItem>
-                                                                        <SelectItem value="pending">Pending</SelectItem>
-                                                                        <SelectItem value="failed">Failed</SelectItem>
-                                                                    </SelectGroup>
-                                                                </SelectContent>
-                                                            </Select>
-                                                        </div>
                                                         <div>
                                                             <Button onClick={saveNotification} className="mt-3">Save</Button>
                                                         </div>
@@ -267,6 +222,38 @@ const CreateReminderCard = () => {
                                                 </div>
                                             </PopoverContent>
                                         </Popover>
+                                    </div>
+                                </div>
+                                <div className="flex justify-between gap-4">
+                                    <div className="w-full">
+                                        <div>
+                                            {notifications.length > 0 && <h3 className="mb-5 mt-5">Your Notifications</h3>}
+                                        </div>
+                                        {notifications.length > 0 && notifications.map((notif, index) => (
+                                            <Card key={index} className="mb-4 pt-5">
+                                                <CardContent>
+                                                    <h4 className="text-muted-foreground mb-4">Notification {index + 1}</h4>
+                                                    <div className="flex flex-col gap-2">
+                                                        <div className="flex justify-between">
+                                                            <Label>Type:</Label>
+                                                            <p>{notif.notification_type}</p>
+                                                        </div>
+                                                        <div className="flex justify-between">
+                                                            <Label>Date:</Label>
+                                                            <p>{notif.date ? format(new Date(notif.date), "PPP") : "N/A"}</p>
+                                                        </div>
+                                                        <div className="flex justify-between">
+                                                            <Label>Message:</Label>
+                                                            <p>{notif.message}</p>
+                                                        </div>
+                                                        <div className="flex justify-between">
+                                                            <Label>Status:</Label>
+                                                            <p>{notif.status}</p>
+                                                        </div>
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
