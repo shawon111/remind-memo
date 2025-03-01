@@ -22,10 +22,10 @@ import { format } from "date-fns";
 const CreateReminderCard = () => {
 
     const { toast } = useToast();
-    const [notification, setNotification] = useState({status: 'pending'});
+    const [notification, setNotification] = useState({ status: 'pending' });
     const [notifications, setNotifications] = useState([]);
 
-    const { register, setValue, watch, handleSubmit, trigger, formState: { errors } } = useForm({
+    const { register, setValue, watch, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(reminderSchema),
     });
 
@@ -38,7 +38,7 @@ const CreateReminderCard = () => {
             return;
         } else {
             setNotifications([...notifications, notification]);
-            setNotification({status: 'pending'});
+            setNotification({ status: 'pending' });
             toast({
                 description: "Notification added successfully.",
             })
@@ -53,10 +53,35 @@ const CreateReminderCard = () => {
     }, [notifications]);
 
     const onSubmit = async (data) => {
+        console.log("Data:", data);
         try {
-            console.log("Final Form Data:", data);
+            const response = await fetch('/api/reminders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            console.log("Response:", response);
+            if (!response.ok) {
+                toast({
+                    variant: "destructive",
+                    title: "Failed to create reminder.",
+                    description: "There was an error while creating the reminder. Please try again.",
+                });
+            } else {
+                reset();
+                setNotifications([]);
+                toast({
+                    description: "Reminder created successfully.",
+                });
+            }
         } catch (error) {
-            console.error("Validation failed:", errors);
+            toast({
+                variant: "destructive",
+                title: "Failed to create reminder.",
+                description: "There was an error while creating the reminder. Please try again.",
+            });
         }
     };
 
@@ -72,7 +97,6 @@ const CreateReminderCard = () => {
             }
         )()
     }
-
     return (
         <div className="mt-6">
             <Card className="pt-8">
