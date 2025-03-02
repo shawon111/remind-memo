@@ -11,6 +11,7 @@ const EventDatePicker = ({ setValue, watch }) => {
     const selectedDate = watch("event_date")
 
     const setDate = (date) => {
+        // const isoDate = date.toISOString();
         setValue("event_date", date, { shouldValidate: true })
     }
     return (

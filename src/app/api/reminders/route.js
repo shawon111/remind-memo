@@ -5,8 +5,22 @@ import { NextResponse } from "next/server";
 export const POST = async (req) => {
     try {
         const reminderData = await req.json();
+        const { event_date, reminder_type, reminder_title, description, how_to_celebrate, is_recurring, status, notifications } = reminderData;
+        const finalData = {
+            event_date: event_date ? new Date(event_date).toISOString() : null,
+            reminder_type,
+            reminder_title,
+            description,
+            how_to_celebrate,
+            is_recurring,
+            status,
+            notifications: notifications?.map(notification => ({
+                ...notification,
+                date: notification.date ? new Date(notification.date).toISOString() : null, 
+            }))
+        }
         const reminder = await prisma.reminder.create({
-            data: {...reminderData, userId: 1}
+            data: { ...finalData, userId: 1 }
         });
         return NextResponse.json(reminder);
     } catch (error) {

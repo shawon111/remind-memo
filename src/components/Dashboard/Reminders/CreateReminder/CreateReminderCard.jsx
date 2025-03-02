@@ -22,7 +22,7 @@ import { format } from "date-fns";
 const CreateReminderCard = () => {
 
     const { toast } = useToast();
-    const [notification, setNotification] = useState({ status: 'pending' });
+    const [notification, setNotification] = useState({});
     const [notifications, setNotifications] = useState([]);
 
     const { register, setValue, watch, handleSubmit, reset, formState: { errors } } = useForm({
@@ -37,8 +37,15 @@ const CreateReminderCard = () => {
             })
             return;
         } else {
-            setNotifications([...notifications, notification]);
-            setNotification({ status: 'pending' });
+            const { date, notification_type, message } = notification;
+            const finalNotification = {
+                date,
+                notification_type,
+                message,
+                status: 'pending'
+            };
+            setNotifications([...notifications, finalNotification]);
+            setNotification({});
             toast({
                 description: "Notification added successfully.",
             })
@@ -104,7 +111,7 @@ const CreateReminderCard = () => {
                     <form>
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-4">
-                                <div className="flex justify-between gap-4">
+                                <div className="flex justify-between flex-col md:flex-row gap-4">
                                     <div className="w-full">
                                         <Input {...register("reminder_title")} className="w-full" type="text" placeholder="Reminder Title" />
                                     </div>
@@ -128,7 +135,7 @@ const CreateReminderCard = () => {
                                         </Select>
                                     </div>
                                 </div>
-                                <div className="flex justify-between gap-4">
+                                <div className="flex justify-between flex-col md:flex-row gap-4">
                                     <div className="w-full">
                                         <Textarea {...register("description")} placeholder="Description" />
                                     </div>
@@ -138,7 +145,7 @@ const CreateReminderCard = () => {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-4">
-                                <div className="flex justify-between gap-4">
+                                <div className="flex justify-between gap-4 flex-col md:flex-row">
                                     <div className="w-full">
                                         <EventDatePicker setValue={setValue} watch={watch} />
                                     </div>
@@ -159,7 +166,7 @@ const CreateReminderCard = () => {
 
                             </div>
                             <div className="flex flex-col gap-4">
-                                <div className="flex justify-between gap-4">
+                                <div className="flex justify-between flex-col md:flex-row gap-4">
                                     <div className="w-full">
                                         <Select
                                             value={watch("status")}
@@ -248,7 +255,7 @@ const CreateReminderCard = () => {
                                         </Popover>
                                     </div>
                                 </div>
-                                <div className="flex justify-between gap-4">
+                                <div className="flex justify-between flex-col md:flex-row gap-4">
                                     <div className="w-full">
                                         <div>
                                             {notifications.length > 0 && <h3 className="mb-5 mt-5">Your Notifications</h3>}
