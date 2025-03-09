@@ -30,9 +30,13 @@ export const POST = async (req) => {
 };
 
 // GET: Retrieve all reminders
-export const GET = async () => {
+export const GET = async (req) => {
+    const { searchParams } = new URL(req.url);
+    const filter = searchParams.get('filter');
     try {
-        const reminders = await prisma.reminder.findMany();
+        const reminders = await prisma.reminder.findMany({
+            where: filter? { reminder_type: { contains: filter, mode: 'insensitive' } }: {}
+        });
         return NextResponse.json(reminders);
     } catch (error) {
         console.error("Error:", error);
