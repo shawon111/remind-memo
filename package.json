@@ -10,6 +10,7 @@
     "email": "email dev"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.12.4",
     "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.22.0",
     "@radix-ui/react-checkbox": "^1.1.3",

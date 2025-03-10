@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { Tajawal, Space_Grotesk } from "next/font/google"
+import { ClerkProvider } from "@clerk/nextjs";
 
 // meta data
 export const metadata = {
@@ -26,11 +27,13 @@ const spaceGrotesk = Space_Grotesk({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${tajawal.className} ${spaceGrotesk.className}`} >
-        <Toaster />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${tajawal.className} ${spaceGrotesk.className}`} >
+          <Toaster />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
