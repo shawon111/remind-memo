@@ -4,7 +4,6 @@ import React from 'react';
 const PastReminders = async() => {
     const res = await fetch(`http://localhost:3000/api/reminders/past`, { cache: "no-store" });
     const reminders = await res.json();
-    console.log(reminders)
     return (
         <div>
             <section>
