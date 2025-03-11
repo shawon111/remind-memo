@@ -1,10 +1,10 @@
-import LoginForm from "@/components/Auth/LoginForm";
+import { SignIn } from '@clerk/nextjs'
 
 const Login = () => {
     return (
         <div>
             <section className="flex justify-center items-center h-[calc(100vh-56px)]">
-                <LoginForm />
+                <SignIn routing='hash' />
             </section>
         </div>
     );

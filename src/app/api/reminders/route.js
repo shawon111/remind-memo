@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 
 // POST: Create a new reminder
 export const POST = async (req) => {
@@ -16,7 +17,7 @@ export const POST = async (req) => {
             status,
             notifications: notifications?.map(notification => ({
                 ...notification,
-                date: notification.date ? new Date(notification.date).toISOString() : null, 
+                date: notification.date ? new Date(notification.date).toISOString() : null,
             }))
         }
         const reminder = await prisma.reminder.create({
@@ -31,11 +32,15 @@ export const POST = async (req) => {
 
 // GET: Retrieve all reminders
 export const GET = async (req) => {
+    const { userId } = await auth();
+    if (!userId) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const { searchParams } = new URL(req.url);
     const filter = searchParams.get('filter');
     try {
         const reminders = await prisma.reminder.findMany({
-            where: filter? { reminder_type: { contains: filter, mode: 'insensitive' } }: {}
+            where: filter ? { reminder_type: { contains: filter, mode: 'insensitive' } } : {}
         });
         return NextResponse.json(reminders);
     } catch (error) {

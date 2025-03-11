@@ -1,13 +1,13 @@
-import SignUpForm from "@/components/Auth/SignUpForm";
+import { SignUp } from '@clerk/nextjs'
 
-const SignUp = () => {
+const SignUpPage = () => {
     return (
         <div>
             <section className="flex justify-center items-center h-[calc(100vh-56px)]">
-                <SignUpForm />
+                <SignUp routing='hash' />
             </section>
         </div>
     );
 };
 
-export default SignUp;
+export default SignUpPage;
