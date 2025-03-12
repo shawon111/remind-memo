@@ -4,6 +4,10 @@ import { auth } from "@clerk/nextjs/server";
 
 // POST: Create a new reminder
 export const POST = async (req) => {
+    const { userId } = await auth();
+    if (!userId) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
         const reminderData = await req.json();
         const { event_date, reminder_type, reminder_title, description, how_to_celebrate, is_recurring, status, notifications } = reminderData;
@@ -14,6 +18,7 @@ export const POST = async (req) => {
             description,
             how_to_celebrate,
             is_recurring,
+            userId,
             status,
             notifications: notifications?.map(notification => ({
                 ...notification,
@@ -21,7 +26,7 @@ export const POST = async (req) => {
             }))
         }
         const reminder = await prisma.reminder.create({
-            data: { ...finalData, userId: 1 }
+            data: finalData
         });
         return NextResponse.json(reminder);
     } catch (error) {

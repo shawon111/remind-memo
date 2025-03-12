@@ -1,9 +1,34 @@
+"use client";
 import { ReminderCard } from '@/components/Dashboard/Reminders/ReminderCard';
-import React from 'react';
+import ReminderSkeleton from '@/components/Dashboard/Reminders/ReminderSkeleton';
+import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@clerk/nextjs';
+import { useEffect, useState } from 'react';
 
-const UpcomingReminders = async() => {
-    const res = await fetch(`http://localhost:3000/api/reminders/upcoming`, { cache: "no-store" });
-    const reminders = await res.json();
+const UpcomingReminders = () => {
+    const { toast } = useToast();
+    const { userId } = useAuth(); 
+    const [reminders, setReminders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const fetchReminders = async () => {
+        if (!userId) return;
+        const res = await fetch("http://localhost:3000/api/reminders/upcoming");
+        if (res.ok) {
+            const data = await res.json();
+            setReminders(data);
+        } else {
+            console.error("Error fetching reminders", await res.text());
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong. Please reload to Try again"
+            })
+        }
+        setLoading(false);
+    };
+    useEffect(() => {
+        fetchReminders();
+    }, [userId]);
+    if (loading) return <ReminderSkeleton />;
     return (
         <div>
             <section>

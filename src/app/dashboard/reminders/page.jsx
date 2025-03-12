@@ -7,7 +7,7 @@ import ReminderSkeleton from "@/components/Dashboard/Reminders/ReminderSkeleton"
 
 const Reminders = () => {
     const { toast } = useToast();
-    const { userId } = useAuth(); // Get the user ID
+    const { userId } = useAuth();
     const [reminders, setReminders] = useState([]);
     const [loading, setLoading] = useState(true);
 
