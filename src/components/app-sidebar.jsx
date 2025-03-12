@@ -110,7 +110,7 @@ export async function AppSidebar({
               {profileImageUrl ? (
                 <img src={profileImageUrl} alt="profile" className="w-full h-full object-cover rounded-full" />
               ) : (
-                <span className="text-lg">{username[0]}</span>
+                <span className="text-lg">{username ? username[0] : "P"}</span>
               )}
             </div>
             <div className="flex flex-col gap-2 flex-nowrap">
