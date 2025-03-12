@@ -45,7 +45,10 @@ export const GET = async (req) => {
     const filter = searchParams.get('filter');
     try {
         const reminders = await prisma.reminder.findMany({
-            where: filter ? { reminder_type: { contains: filter, mode: 'insensitive' } } : {}
+            where: {
+                userId: userId,
+                ...(filter ? { reminder_type: { contains: filter, mode: 'insensitive' } } : {})
+            }
         });
         return NextResponse.json(reminders);
     } catch (error) {

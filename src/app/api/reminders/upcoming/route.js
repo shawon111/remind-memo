@@ -13,6 +13,7 @@ export const GET = async (req) => {
     try {
         const reminders = await prisma.reminder.findMany({
             where: {
+                userId: userId,
                 event_date: {
                     gte: today,
                 },
