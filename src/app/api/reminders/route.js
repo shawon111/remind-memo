@@ -56,32 +56,3 @@ export const GET = async (req) => {
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
 };
-
-// PUT: Update a reminder by ID
-export const PUT = async (req) => {
-    try {
-        const { id, ...reminderData } = await req.json();
-        const updatedReminder = await prisma.reminder.update({
-            where: { id: Number(id) },
-            data: reminderData
-        });
-        return NextResponse.json(updatedReminder);
-    } catch (error) {
-        console.error("Error:", error);
-        return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
-    }
-};
-
-// DELETE: Delete a reminder by ID
-export const DELETE = async (req) => {
-    try {
-        const { id } = await req.json();
-        await prisma.reminder.delete({
-            where: { id: Number(id) }
-        });
-        return NextResponse.json({ message: "Reminder deleted successfully" });
-    } catch (error) {
-        console.error("Error:", error);
-        return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
-    }
-};

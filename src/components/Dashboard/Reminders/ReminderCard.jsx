@@ -13,9 +13,10 @@ import {
 import { Switch } from "@/components/ui/switch"
 import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/formatDate"
+import ReminderStatusSwitch from "./ReminderStatusSwitch"
 
 export function ReminderCard({ className, reminder }) {
-    const { reminder_type, reminder_title, notifications, event_date, status } = reminder;
+    const { reminder_type, reminder_title, notifications, event_date, status, id } = reminder;
     return (
         <div className="w-full md:w-[49%] lg:w-[32.5%]">
             <Card className={cn("w-full", className)}>
@@ -37,7 +38,7 @@ export function ReminderCard({ className, reminder }) {
                                 Enable to get notifications.
                             </p>
                         </div>
-                        <Switch checked={status=="enabled" ? true : false} />
+                        <ReminderStatusSwitch status={status} id={id} />
                     </div>
                     <div>
                         {notifications.map((notification, index) => (
