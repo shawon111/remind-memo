@@ -58,6 +58,7 @@ model Reminder {
   frequency        ReminderFrequency @default(yearly)
   status           ReminderStatus
   userId           String
+  email            String            @default("")
   notifications    Json              @default("[]")
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt

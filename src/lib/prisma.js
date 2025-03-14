@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 
 let prisma;
-if (process.env === "production"){
+if (process.env.APP_MODE === "production"){
     prisma = new PrismaClient()
 }else{
     if(!global.prisma){

@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 
 // POST: Create a new reminder
 export const POST = async (req) => {
-    const { userId } = await auth();
+    const { userId, emailAddress } = await auth();
     if (!userId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -19,6 +19,7 @@ export const POST = async (req) => {
             how_to_celebrate,
             is_recurring,
             userId,
+            email: emailAddress,
             status,
             notifications: notifications?.map(notification => ({
                 ...notification,

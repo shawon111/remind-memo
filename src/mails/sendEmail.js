@@ -1,13 +1,12 @@
-require("dotenv").config(); 
+const transporter = require("./transporter");
 
 const sendEmail = async (email, subject, message) => {
-    const transporter = require("./transporter");
     try {
         await transporter.sendMail({
-        from: process.env.SMTP_EMAIL,
-        to: email,
-        subject: subject,
-        html: message,
+            from: process.env.SMTP_EMAIL,
+            to: email,
+            subject: subject,
+            html: message,
         });
         console.log("Email sent successfully");
     } catch (error) {
