@@ -20,7 +20,7 @@ export function ReminderCard({ className, reminder }) {
     return (
         <div className="w-full md:w-[49%] lg:w-[32.5%]">
             <Card className={cn("w-full", className)}>
-                <CardHeader className="flex flex-row items-start justify-between">
+                <CardHeader className="flex flex-row items-start justify-between flex-wrap">
                     <div className="flex gap-y-1 flex-col">
                         <CardTitle className="capitalize">{reminder_type}</CardTitle>
                         <CardDescription className="capitalize">{reminder_title}</CardDescription>
