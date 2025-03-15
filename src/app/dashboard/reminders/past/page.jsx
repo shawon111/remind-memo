@@ -20,6 +20,13 @@ const PastReminders = () => {
         const res = await fetch(`${BaseURL}/api/reminders/past`);
         if (res.ok) {
             const data = await res.json();
+            if (!data.length) {
+                toast({
+                    variant: "info",
+                    title: "No reminders found"
+                });
+                return <p>No reminders found</p>;
+            }
             setReminders(data);
         } else {
             setLoading(false);
@@ -42,9 +49,7 @@ const PastReminders = () => {
             <section>
                 <div className="flex items-start justify-start gap-x-5 gap-y-5 flex-wrap">
                     {
-                        reminders.length ? reminders.map((reminder, index) => <ReminderCard key={index} reminder={reminder} />) : <div>
-                            <p>No reminders found</p>
-                        </div>
+                        reminders.length ? reminders.map((reminder, index) => <ReminderCard key={index} reminder={reminder} />) : <></>
                     }
                 </div>
             </section>

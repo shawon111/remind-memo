@@ -104,7 +104,7 @@ export async function AppSidebar({
             ))}
           </SidebarContent>
         </div>
-        <SidebarFooter className="margin-top-auto pb-4">
+        <SidebarFooter className="pb-6 md:pb-4">
           <div className="flex items-center gap-4">
             <div className={"flex items-center justify-center brand-bg text-white font-bold w-12 h-12 rounded-full"}>
               {profileImageUrl ? (
