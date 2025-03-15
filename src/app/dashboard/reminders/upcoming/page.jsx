@@ -10,12 +10,14 @@ const UpcomingReminders = () => {
     const { userId } = useAuth();
     const [reminders, setReminders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const BaseURL = process.env.NEXT_PUBLIC_BASE_URL;
+
     const fetchReminders = async () => {
         if (!userId) {
             setLoading(false);
             return <p className="text-red-900">Something went wrong! Please try again.</p>;
         };
-        const res = await fetch("http://localhost:3000/api/reminders/upcoming");
+        const res = await fetch(`${BaseURL}/api/reminders/upcoming`);
         if (res.ok) {
             const data = await res.json();
             setReminders(data);

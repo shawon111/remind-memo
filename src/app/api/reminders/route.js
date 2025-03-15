@@ -1,14 +1,15 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 // POST: Create a new reminder
 export const POST = async (req) => {
-    const { userId, emailAddress } = await auth();
+    const { userId } = await auth();
     if (!userId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
+        const user = await currentUser();
         const reminderData = await req.json();
         const { event_date, reminder_type, reminder_title, description, how_to_celebrate, is_recurring, status, notifications } = reminderData;
         const finalData = {
@@ -19,7 +20,7 @@ export const POST = async (req) => {
             how_to_celebrate,
             is_recurring,
             userId,
-            email: emailAddress,
+            email: user?.emailAddresses[0]?.emailAddress,
             status,
             notifications: notifications?.map(notification => ({
                 ...notification,

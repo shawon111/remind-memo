@@ -56,11 +56,9 @@ const CreateReminderCard = () => {
         if (notifications.length > 0) {
             setValue("notifications", notifications);
         }
-        console.log("Notifications:", notifications);
     }, [notifications]);
 
     const onSubmit = async (data) => {
-        console.log("Data:", data);
         try {
             const response = await fetch('/api/reminders', {
                 method: 'POST',
