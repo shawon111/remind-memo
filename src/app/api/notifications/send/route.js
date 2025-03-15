@@ -8,6 +8,10 @@ export const POST = async (req) => {
         return NextResponse.json({ error: "Not authorized" }, { status: 400 });
     }
 
+    if(secretKey !== process.env.CRON_SECRET_KEY) {
+        return NextResponse.json({ error: "Not authorized" }, { status: 400 });
+    }
+
     const getRemindersForToday = async () => {
         const today = new Date().setHours(0, 0, 0, 0);
         const result = await prisma.reminder.findMany({
@@ -26,10 +30,7 @@ export const POST = async (req) => {
         let hasNotificationsSent = false;
 
         for (const reminder of reminders) {
-            // Check if notifications are a string and parse if necessary
-            const notifications = typeof reminder.notifications === "string" 
-                ? JSON.parse(reminder.notifications)
-                : reminder.notifications;
+            const notifications = reminder.notifications || [];
 
             const notificationsToday = notifications.filter((notification) => {
                 const notificationDate = new Date(notification.date).setHours(0, 0, 0, 0);
@@ -51,6 +52,18 @@ export const POST = async (req) => {
                     try {
                         await sendEmail(reminder.email, reminder.reminder_title, notification.message);
                         hasNotificationsSent = true; 
+                        // Update notification status to "sent" in the database
+                        notifications.forEach((notif) => {
+                            if (notif.date === notification.date && notif.notification_type === "email") {
+                                notif.status = "sent";
+                            }
+                        });
+                        await prisma.reminder.update({
+                            where: { id: reminder.id },
+                            data: {
+                                notifications: notifications
+                            }
+                        });
                     } catch (error) {
                         console.error("Error sending email", error);
                     }
