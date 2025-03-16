@@ -8,18 +8,19 @@ export const POST = async (req) => {
         return NextResponse.json({ error: "Not authorized" }, { status: 400 });
     }
 
-    if(secretKey !== process.env.CRON_SECRET_KEY) {
+    if (secretKey !== process.env.CRON_SECRET_KEY) {
         return NextResponse.json({ error: "Not authorized" }, { status: 400 });
     }
 
+    const today = new Date();
+
     const getRemindersForToday = async () => {
-        const today = new Date();
         const result = await prisma.reminder.findMany({
             where: {
                 event_date: {
                     gte: today,
                 },
-                status: "enabled" // Ensure status is "enabled"
+                status: "enabled" 
             }
         });
         return result;
@@ -50,8 +51,8 @@ export const POST = async (req) => {
             for (const notification of notificationsToday) {
                 if (reminder.email) {
                     try {
-                        await sendEmail( reminder, notification);
-                        hasNotificationsSent = true; 
+                        await sendEmail(reminder, notification);
+                        hasNotificationsSent = true;
                         // Update notification status to "sent" in the database
                         notifications.forEach((notif) => {
                             if (notif.date === notification.date && notif.notification_type === "email") {
