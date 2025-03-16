@@ -44,6 +44,8 @@ export const POST = async (req) => {
                 );
             });
 
+            console.log("Notifications for today:", notificationsToday);
+
             // If no notifications for today, skip to next reminder
             if (notificationsToday.length === 0) {
                 continue;
