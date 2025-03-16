@@ -31,8 +31,6 @@ export const POST = async (req) => {
         const reminders = await getRemindersForToday();
         let hasNotificationsSent = false;
 
-        console.log("Reminders for today:", reminders);
-
         for (const reminder of reminders) {
             const notifications = reminder.notifications || [];
 
@@ -45,8 +43,6 @@ export const POST = async (req) => {
                     notification.notification_type === "email"
                 );
             });
-
-            console.log("Notifications for today:", notificationsToday);
 
             // If no notifications for today, skip to next reminder
             if (notificationsToday.length === 0) {

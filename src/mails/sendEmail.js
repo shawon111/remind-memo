@@ -7,13 +7,13 @@ const sendEmail = async (reminder, notification) => {
         pretty: false,
     });
     try {
-        await transporter.sendMail({
+        const mailInfo = await transporter.sendMail({
             from: process.env.SMTP_EMAIL,
             to: reminder.email,
             subject: reminder.reminder_title,
             html: emailHTML,
         });
-        console.log("Email sent successfully");
+        console.log("mailinfo", mailInfo);
     } catch (error) {
         console.error("Error sending email", error);
     }
