@@ -42,15 +42,15 @@ const reminders = [
 const GeneralNavMenu = () => {
     return (
         <NavigationMenu>
-            <NavigationMenuList>
+            <NavigationMenuList className="flex-col md:flex-row items-start md:items-center space-x-0 md:space-x-1 space-y-5 md:space-y-0">
                 <NavigationMenuItem>
-                    <Link className="dark-text text-base font-semibold space-grotesk" href="/" passHref>
+                    <Link className="dark-text text-xl md:text-base font-semibold space-grotesk" href="/" passHref>
                         Home
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-[#fff0]">
-                        <Link className="dark-text text-base font-semibold space-grotesk" href="/reminders">Reminders</Link>
+                    <NavigationMenuTrigger className="bg-[#fff0] p-0 md:p-3">
+                        <Link className="dark-text text-xl md:text-base font-semibold space-grotesk" href="/reminders">Reminders</Link>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -67,7 +67,7 @@ const GeneralNavMenu = () => {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link className="dark-text text-base font-semibold space-grotesk" href="/contact" passHref>
+                    <Link className="dark-text text-xl md:text-base font-semibold space-grotesk" href="/contact" passHref>
                         Contact
                     </Link>
                 </NavigationMenuItem>
@@ -89,7 +89,7 @@ const ListItem = React.forwardRef(({ className, title, children, ...props }, ref
                     {...props}
                 >
                     <div className="text-base font-semibold leading-none">{title}</div>
-                    <p className="line-clamp-2 text-base leading-snug tajawal font-normal text-muted-foreground">
+                    <p className="line-clamp-2 text-lg md:text-base leading-snug tajawal font-normal text-muted-foreground">
                         {children}
                     </p>
                 </Link>
