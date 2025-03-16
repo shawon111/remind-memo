@@ -30,6 +30,8 @@ export const POST = async (req) => {
         const reminders = await getRemindersForToday();
         let hasNotificationsSent = false;
 
+        console.log("Reminders for today:", reminders);
+
         for (const reminder of reminders) {
             const notifications = reminder.notifications || [];
 
