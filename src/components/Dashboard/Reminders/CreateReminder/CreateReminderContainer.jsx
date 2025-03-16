@@ -1,10 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import CreateReminderCard from "./CreateReminderCard";
 
 const CreateReminderContainer = () => {
-    const [progress, setProgress] = useState(20);
     return (
         <div className="pt-12 pb-12">
             <div className="lg:w-[600px] mx-auto">
