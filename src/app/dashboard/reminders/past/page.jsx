@@ -20,13 +20,6 @@ const PastReminders = () => {
         const res = await fetch(`${BaseURL}/api/reminders/past`);
         if (res.ok) {
             const data = await res.json();
-            if (!data.length) {
-                toast({
-                    variant: "info",
-                    title: "No reminders found"
-                });
-                return <p>No reminders found</p>;
-            }
             setReminders(data);
         } else {
             setLoading(false);
@@ -42,7 +35,14 @@ const PastReminders = () => {
     useEffect(() => {
         fetchReminders();
     }, [userId]);
-    if (loading) return <ReminderSkeleton />;
+
+    // If loading, show skeleton
+    // If no reminders found, show message
+    if (loading && reminders.length === 0) {
+        return <ReminderSkeleton />;
+    } else if (!loading && reminders.length === 0) {
+        return <p>No reminders found</p>;
+    }
 
     return (
         <div>
