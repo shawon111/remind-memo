@@ -14,7 +14,6 @@ export const POST = async (req) => {
 
     const getRemindersForToday = async () => {
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
         const result = await prisma.reminder.findMany({
             where: {
                 event_date: {
@@ -35,7 +34,6 @@ export const POST = async (req) => {
 
             const notificationsToday = notifications.filter((notification) => {
                 const notificationDate = new Date(notification.date);
-                notificationDate.setHours(0, 0, 0, 0);
                 return (
                     notificationDate === today &&
                     notification.status === "pending" &&
