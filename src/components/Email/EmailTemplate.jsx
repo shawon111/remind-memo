@@ -15,7 +15,7 @@ import {
 } from '@react-email/components';
 import React from 'react';
 
-const StackOverflowTipsEmail = ({ reminder, notification }) => {
+const EmailTemplate = ({ reminder, notification }) => {
     const { reminder_type, reminder_title, description, how_to_celebrate, event_date, } = reminder;
     const { message } = notification;
     const convertReminderType = (reminder_type) => {
@@ -59,7 +59,7 @@ const StackOverflowTipsEmail = ({ reminder, notification }) => {
     );
 }
 
-export default StackOverflowTipsEmail;
+export default EmailTemplate;
 
 const main = { backgroundColor: '#f3f3f5', fontFamily: 'HelveticaNeue,Helvetica,Arial,sans-serif' };
 const container = { width: '680px', maxWidth: '100%', margin: '0 auto', backgroundColor: '#ffffff'};

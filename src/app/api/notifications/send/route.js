@@ -50,7 +50,7 @@ export const POST = async (req) => {
             for (const notification of notificationsToday) {
                 if (reminder.email) {
                     try {
-                        await sendEmail(reminder.email, reminder.reminder_title, notification.message);
+                        await sendEmail( reminder, notification);
                         hasNotificationsSent = true; 
                         // Update notification status to "sent" in the database
                         notifications.forEach((notif) => {
