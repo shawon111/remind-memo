@@ -21,6 +21,9 @@ export const POST = async (req) => {
                 },
                 status: "pending",
                 notification_type: "email", 
+                reminder: {
+                    status: "enabled",  // Only include notifications with enabled reminders
+                },
             },
             include: {
                 reminder: true, 
