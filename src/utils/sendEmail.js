@@ -21,12 +21,15 @@ const sendEmail = async (reminder, notification) => {
             subject: reminder.reminder_title,
             html: emailHTML,
         });
-
+        if (response.error) {
+            console.error("Error sending email:", response.error);
+            return null;
+        }
         console.log("Email sent successfully:", response);
         return response;
     } catch (error) {
         console.error("Error sending email:", error);
-        return null; 
+        return null;
     }
 };
 
