@@ -4,80 +4,60 @@ import prisma from "@/lib/prisma";
 
 export const POST = async (req) => {
     const secretKey = req.headers.get('x-secret-key');
-    if (!secretKey) {
-        return NextResponse.json({ error: "Not authorized" }, { status: 400 });
-    }
-
-    if (secretKey !== process.env.CRON_SECRET_KEY) {
+    if (!secretKey || secretKey !== process.env.CRON_SECRET_KEY) {
         return NextResponse.json({ error: "Not authorized" }, { status: 400 });
     }
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const getRemindersForToday = async () => {
-        const result = await prisma.reminder.findMany({
-            where: {
-                event_date: {
-                    gte: today,
-                },
-                status: "enabled" 
-            }
-        });
-        return result;
-    };
+    today.setHours(0, 0, 0, 0);  // Set time to start of the day
 
     try {
-        const reminders = await getRemindersForToday();
+        // Fetch Notifications for Today
+        const notificationsToday = await prisma.notification.findMany({
+            where: {
+                date: {
+                    gte: today,
+                    lt: new Date(today.getTime() + 24 * 60 * 60 * 1000), 
+                },
+                status: "pending",
+                notification_type: "email", 
+            },
+            include: {
+                reminder: true, 
+            }
+        });
+
         let hasNotificationsSent = false;
 
-        for (const reminder of reminders) {
-            const notifications = reminder.notifications || [];
+        // Process each notification
+        for (const notification of notificationsToday) {
+            const reminder = notification.reminder;
 
-            const notificationsToday = notifications.filter((notification) => {
-                const notificationDate = new Date(notification.date);
-                notificationDate.setHours(0, 0, 0, 0);
-                return (
-                    notificationDate.getTime() === today.getTime() &&
-                    notification.status === "pending" &&
-                    notification.notification_type === "email"
-                );
-            });
-
-            // If no notifications for today, skip to next reminder
-            if (notificationsToday.length === 0) {
+            if (!reminder || !reminder.email) {
+                console.log("No associated reminder or reminder has no email.");
                 continue;
             }
 
-            // Process notifications
-            for (const notification of notificationsToday) {
-                if (reminder.email) {
-                    try {
-                        await sendEmail(reminder, notification);
-                        hasNotificationsSent = true;
-                        // Update notification status to "sent" in the database
-                        notifications.forEach((notif) => {
-                            if (notif.date === notification.date && notif.notification_type === "email") {
-                                notif.status = "sent";
-                            }
-                        });
-                        await prisma.reminder.update({
-                            where: { id: reminder.id },
-                            data: {
-                                notifications: notifications
-                            }
-                        });
-                    } catch (error) {
-                        console.error("Error sending email", error);
-                    }
-                } else {
-                    return NextResponse.json({ error: "No email provided" }, { status: 400 });
-                }
+            // Send the email
+            try {
+                await sendEmail(reminder, notification);
+                hasNotificationsSent = true;
+
+                // Step 4: Update notification status to "sent"
+                await prisma.notification.update({
+                    where: { id: notification.id },
+                    data: { status: "sent" }
+                });
+
+                console.log("Notification sent and updated successfully.");
+            } catch (error) {
+                console.error("Error sending email", error);
             }
         }
 
+        // Step 5: Return a response
         if (hasNotificationsSent) {
-            return NextResponse.json({ message: "Notification sent successfully" });
+            return NextResponse.json({ message: "Notifications sent successfully" });
         } else {
             return NextResponse.json({ message: "No notifications for today" });
         }

@@ -13,7 +13,7 @@ export const POST = async (req) => {
         const reminderData = await req.json();
         const { event_date, reminder_type, reminder_title, description, how_to_celebrate, is_recurring, status, notifications } = reminderData;
         const finalData = {
-            event_date: event_date ? new Date(event_date).toISOString() : null,
+            event_date: new Date(event_date),
             reminder_type,
             reminder_title,
             description,
@@ -22,13 +22,18 @@ export const POST = async (req) => {
             userId,
             email: user?.emailAddresses[0]?.emailAddress,
             status,
-            notifications: notifications?.map(notification => ({
-                ...notification,
-                date: notification.date ? new Date(notification.date).toISOString() : null,
-            }))
+            notifications: {
+                create: notifications?.map(notification => ({
+                    notification_type: notification.notification_type,
+                    date: new Date(notification.date),
+                    message: notification.message || "",
+                    status: notification.status,
+                })) || [],
+            },
         }
         const reminder = await prisma.reminder.create({
-            data: finalData
+            data: finalData,
+            include: { notifications: true }
         });
         return NextResponse.json(reminder);
     } catch (error) {
@@ -50,7 +55,8 @@ export const GET = async (req) => {
             where: {
                 userId: userId,
                 ...(filter ? { reminder_type: { contains: filter, mode: 'insensitive' } } : {})
-            }
+            },
+            include: { notifications: true }
         });
         return NextResponse.json(reminders);
     } catch (error) {

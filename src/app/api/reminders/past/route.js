@@ -19,6 +19,7 @@ export const GET = async (req) => {
                 },
                 ...(filter ? { reminder_type: { contains: filter, mode: 'insensitive' } } : {}),
             },
+            include: { notifications: true }
         });
         return NextResponse.json(reminders);
     } catch (error) {
