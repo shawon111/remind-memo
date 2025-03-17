@@ -17,6 +17,7 @@ const MobileNavigation = () => {
                 <Menu />
             </SheetTrigger>
             <SheetContent>
+            <SheetTitle></SheetTitle>
                 <GeneralNavMenu />
                 <div className="mt-5">
                     <UserMenu />

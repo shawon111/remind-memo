@@ -50,7 +50,7 @@ const GeneralNavMenu = () => {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className="bg-[#fff0] p-0 md:p-3">
-                        <Link className="dark-text text-xl md:text-base font-semibold space-grotesk" href="/reminders">Reminders</Link>
+                        <p className="dark-text text-xl md:text-base font-semibold space-grotesk">Reminders</p>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -89,7 +89,7 @@ const ListItem = React.forwardRef(({ className, title, children, ...props }, ref
                     {...props}
                 >
                     <div className="text-base font-semibold leading-none">{title}</div>
-                    <p className="line-clamp-2 text-lg md:text-base leading-snug tajawal font-normal text-muted-foreground">
+                    <p className="line-clamp-2 text-base leading-snug tajawal font-normal text-muted-foreground hidden md:block">
                         {children}
                     </p>
                 </Link>
