@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import sendEmail from "@/mails/sendEmail";
 import prisma from "@/lib/prisma";
+import sendEmail from "@/utils/sendEmail";
 
 export const POST = async (req) => {
     const secretKey = req.headers.get('x-secret-key');
