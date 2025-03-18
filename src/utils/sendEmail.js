@@ -4,7 +4,7 @@ import resendClient from "./resendClient";
 
 const sendEmail = async (reminder, notification) => {
     try {
-        if (!process.env.FORM_EMAIL) {
+        if (!process.env.FROM_EMAIL) {
             throw new Error("Missing form email");
         }
 
