@@ -22,14 +22,12 @@ const sendEmail = async (reminder, notification) => {
             html: emailHTML,
         });
         if (response.error) {
-            console.error("Error sending email:", response.error);
-            return null;
+            throw new Error(`Resend API Error: ${response.error.message}`);
         }
-        console.log("Email sent successfully:", response);
         return response;
     } catch (error) {
         console.error("Error sending email:", error);
-        return null;
+        throw error
     }
 };
 

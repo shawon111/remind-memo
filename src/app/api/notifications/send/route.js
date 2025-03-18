@@ -44,23 +44,20 @@ export const POST = async (req) => {
             // Send the email
             try {
                 const mailStatus = await sendEmail(reminder, notification);
-                if (mailStatus !== null) {
+                if (mailStatus) {
                     hasNotificationsSent = true;
+                    // Update notification status to "sent"
+                    await prisma.notification.update({
+                        where: { id: notification.id },
+                        data: { status: "sent" }
+                    });
                 }
-
-                // Step 4: Update notification status to "sent"
-                await prisma.notification.update({
-                    where: { id: notification.id },
-                    data: { status: "sent" }
-                });
-
                 console.log("Notification sent and updated successfully.");
             } catch (error) {
-                console.error("Error sending email", error);
+                console.log("Error sending email", error)
             }
         }
 
-        // Step 5: Return a response
         if (hasNotificationsSent) {
             return NextResponse.json({ message: "Notifications sent successfully" });
         } else {
@@ -68,6 +65,6 @@ export const POST = async (req) => {
         }
     } catch (error) {
         console.error("Error:", error);
-        return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+        return NextResponse.json({ errorMessage: "Something went wrong", error: error }, { status: 500 });
     }
 };
