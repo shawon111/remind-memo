@@ -17,16 +17,16 @@ export const POST = async (req) => {
             where: {
                 date: {
                     gte: today,
-                    lt: new Date(today.getTime() + 24 * 60 * 60 * 1000), 
+                    lt: new Date(today.getTime() + 24 * 60 * 60 * 1000),
                 },
                 status: "pending",
-                notification_type: "email", 
+                notification_type: "email",
                 reminder: {
                     status: "enabled",  // Only include notifications with enabled reminders
                 },
             },
             include: {
-                reminder: true, 
+                reminder: true,
             }
         });
 
@@ -43,8 +43,10 @@ export const POST = async (req) => {
 
             // Send the email
             try {
-                await sendEmail(reminder, notification);
-                hasNotificationsSent = true;
+                const mailStatus = await sendEmail(reminder, notification);
+                if (mailStatus !== null) {
+                    hasNotificationsSent = true;
+                }
 
                 // Step 4: Update notification status to "sent"
                 await prisma.notification.update({
