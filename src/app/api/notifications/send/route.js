@@ -61,7 +61,7 @@ export const POST = async (req) => {
         if (hasNotificationsSent) {
             return NextResponse.json({ message: "Notifications sent successfully" });
         } else {
-            return NextResponse.json({ message: "No notifications for today" });
+            return NextResponse.json({ message: "No notification has sent" });
         }
     } catch (error) {
         console.error("Error:", error);

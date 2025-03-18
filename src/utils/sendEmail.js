@@ -16,7 +16,7 @@ const sendEmail = async (reminder, notification) => {
 
         // Send email via Resend
         const response = await resendClient.emails.send({
-            from: `Memory Mate <${process.env.FORM_EMAIL}>`,
+            from: `Memory Mate <${process.env.FROM_EMAIL}>`,
             to: reminder.email,
             subject: reminder.reminder_title,
             html: emailHTML,
