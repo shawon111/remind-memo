@@ -20,7 +20,7 @@ export async function POST() {
         const existingMetadata = user?.privateMetadata || {};
 
         // Prepare updated metadata
-        const updatedMetadata = { ...existingMetadata, limit: 15 };
+        const updatedMetadata = { ...existingMetadata, limit: 15, availableReminder: 15 };
 
         // Update user metadata
         await client.users.updateUser(userId, {

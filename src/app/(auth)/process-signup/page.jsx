@@ -48,6 +48,7 @@ const ProcessSignUp = () => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
             {isUpdating && <p>Please wait while we finalize your account setup.</p>}
+            <h2 className="text-4xl brand-text mb-[100px]">Finalize Your Account</h2>
             <button
                 onClick={() => updateMetadata()}
                 className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"

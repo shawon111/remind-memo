@@ -1,9 +1,10 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth, clerkClient, currentUser } from "@clerk/nextjs/server";
 
 // POST: Create a new reminder
 export const POST = async (req) => {
+    const client = await clerkClient();
     const { userId } = await auth();
     if (!userId) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -35,6 +36,18 @@ export const POST = async (req) => {
             data: finalData,
             include: { notifications: true }
         });
+
+        // Decrease availableReminder by 1
+        await client.users.updateUser(userId, {
+            privateMetadata: {
+                ...user.privateMetadata,
+                availableReminder: Math.max(
+                    (user.privateMetadata?.availableReminder ?? 15) - 1,
+                    0
+                ),
+            },
+        });
+
         return NextResponse.json(reminder);
     } catch (error) {
         console.error("Error:", error);
