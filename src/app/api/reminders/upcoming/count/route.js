@@ -10,7 +10,7 @@ export const GET = async () => {
     const today = new Date();
     try {
         const count = await prisma.reminder.count({
-            where: { date: { gte: today }, userId }
+            where: { event_date: { gte: today }, userId }
         });
         return NextResponse.json({ count })
     } catch (error) {
