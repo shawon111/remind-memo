@@ -29,6 +29,7 @@ export const POST = async (req) => {
                     date: new Date(notification.date),
                     message: notification.message || "",
                     status: notification.status,
+                    userId,
                 })) || [],
             },
         }
