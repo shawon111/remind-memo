@@ -8,7 +8,9 @@ export const GET = async (req) => {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const { searchParams } = new URL(req.url);
-    const filter = searchParams.get('filter');
+    const r_type = searchParams.get('r_type');
+    const limitParam = searchParams.get('limit');
+    const limit = isNaN(parseInt(limitParam, 10)) ? 10 : parseInt(limitParam, 10);
     const today = new Date();
     try {
         const reminders = await prisma.reminder.findMany({
@@ -17,9 +19,13 @@ export const GET = async (req) => {
                 event_date: {
                     gte: today,
                 },
-                ...(filter ? { reminder_type: { contains: filter, mode: 'insensitive' } } : {}),
+                ...(r_type ? { reminder_type: { contains: r_type, mode: 'insensitive' } } : {}),
             },
-            include: { notifications: true }
+            include: limitParam ? undefined : { notifications: true },
+            orderBy: {
+                event_date: "desc",
+            },
+            take: limit,
         });
         return NextResponse.json(reminders);
     } catch (error) {

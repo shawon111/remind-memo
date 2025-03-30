@@ -19,7 +19,8 @@ const OverviewStats = async() => {
                 headers: {
                     'Content-Type': 'application/json',
                     Cookie: cookieStore.toString()
-                }
+                },
+                cache: 'no-store'
             });
             const data = await response.json();
             return data.count;
@@ -37,7 +38,8 @@ const OverviewStats = async() => {
                 headers: {
                     'Content-Type': 'application/json',
                     Cookie: cookieStore.toString()
-                }
+                },
+                cache: 'no-store'
             });
             const data = await response.json();
             return data.count;
@@ -55,7 +57,8 @@ const OverviewStats = async() => {
                 headers: {
                     'Content-Type': 'application/json',
                     Cookie: cookieStore.toString()
-                }
+                },
+                cache: 'no-store'
             });
             const data = await response.json();
             return data.count;
@@ -64,9 +67,6 @@ const OverviewStats = async() => {
             return 0;
         }
     }
-
-
-
     return (
         <section className="overview-stats">
             <div className="flex items-center justify-between flex-wrap gap-y-3">
