@@ -22,7 +22,7 @@ const Analytics = async() => {
         <div>
             <OverviewStats />
             <section>
-                <div className="flex items-start justify-between flex-wrap pt-10 gap-y-3">
+                <div className="flex items-start justify-between flex-wrap pt-10 pb-3 gap-y-3">
                     <div className="w-full lg:w-[60%]">
                         <OneYearReminderChart data={analyticsData.countsByMonth} />
                     </div>
