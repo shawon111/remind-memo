@@ -26,7 +26,7 @@ const HomeHero = () => {
                         </p>
                     </div>
                     <div className="text-center mt-7">
-                        <Link className="brand-bg rounded-[50px] px-10 py-4 flex items-center gap-3 text-white text-base md:text-lg font-semibold w-fit mx-auto btn-effect-one" href="/">
+                        <Link className="brand-bg rounded-[50px] px-10 py-4 flex items-center gap-3 text-white text-base md:text-lg font-semibold w-fit mx-auto btn-effect-one" href="/dashboard">
                             <span>Set Your Reminders!</span>
                             <span>
                                 <TbCircleArrowUpRightFilled size={26} />
