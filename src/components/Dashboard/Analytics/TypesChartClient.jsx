@@ -64,41 +64,6 @@ export function TypesChartClient({chartData}) {
           <CardTitle>Your Life, Categorized – Reminder Breakdown</CardTitle>
           <CardDescription>Specified by type</CardDescription>
         </div>
-        <Select value={activeType} onValueChange={setActiveType}>
-          <SelectTrigger
-            className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
-            aria-label="Select a value"
-          >
-            <SelectValue placeholder="Select Type" />
-          </SelectTrigger>
-          <SelectContent align="end" className="rounded-xl">
-            {reminderTypes.map((key) => {
-              const config = chartConfig[key]
-
-              if (!config) {
-                return null
-              }
-
-              return (
-                <SelectItem
-                  key={key}
-                  value={key}
-                  className="rounded-lg [&_span]:flex"
-                >
-                  <div className="flex items-center gap-2 text-xs">
-                    <span
-                      className="flex h-3 w-3 shrink-0 rounded-sm"
-                      style={{
-                        backgroundColor: `var(--color-${key})`,
-                      }}
-                    />
-                    {config?.label}
-                  </div>
-                </SelectItem>
-              )
-            })}
-          </SelectContent>
-        </Select>
       </CardHeader>
       <CardContent className="flex flex-1 justify-center pb-0">
         <ChartContainer

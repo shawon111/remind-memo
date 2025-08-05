@@ -8,29 +8,26 @@ import {
 
 import YearChart from "./YearChart";
 
-const chartData = [
-    { date: "2023-01-01", count: 45 },
-    { date: "2023-02-01", count: 67 },
-    { date: "2023-03-01", count: 12 },
-    { date: "2023-04-01", count: 89 },
-    { date: "2023-05-01", count: 34 },
-    { date: "2023-06-01", count: 76 },
-    { date: "2023-07-01", count: 29 },
-    { date: "2023-08-01", count: 55 },
-    { date: "2023-09-01", count: 92 },
-    { date: "2023-10-01", count: 40 },
-    { date: "2023-11-01", count: 61 },
-    { date: "2023-12-01", count: 73 }
-  ];  
-  
-const OneYearReminderChart = () => {
+const OneYearReminderChart = ({ data }) => {
+    const monthNames = [
+        '2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01', '2023-06-01',
+        '2023-07-01', '2023-08-01', '2023-09-01', '2023-10-01', '2023-11-01', '2023-12-01'
+    ]
+
+    // count total for this year
+    const totalCount = data.reduce((acc, item) => acc + item);
+
+    const chartData = data.map((count, index) => ({
+        date: monthNames[index],
+        count
+    }))
     return (
         <Card>
             <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
                 <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-                    <CardTitle>Your Next 12 Months at a Glance!</CardTitle>
+                    <CardTitle>12 Months of this year at a Glance!</CardTitle>
                     <CardDescription>
-                        Showing total reminders for the next 12 months
+                        Showing total reminders for this year
                     </CardDescription>
                 </div>
                 <div className="flex">
@@ -41,7 +38,7 @@ const OneYearReminderChart = () => {
                             Total
                         </span>
                         <span className="text-lg font-bold leading-none sm:text-3xl">
-                            30
+                            {totalCount}
                         </span>
                     </button>
                 </div>
