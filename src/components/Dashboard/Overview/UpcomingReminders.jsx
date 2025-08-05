@@ -101,38 +101,6 @@ export default async function UpcomingReminders() {
                                         </TableRow>
                                     ))
                                 }
-                                {/* <TableRow>
-                                    <TableCell>
-                                        <div className="font-medium">
-                                            <Link href="#">Liam Johnson</Link>
-                                        </div>
-                                        <div className="hidden text-sm text-muted-foreground md:inline tajawal">
-                                            Birthday Reminder
-                                        </div>
-                                    </TableCell>
-                                    <TableCell className="hidden xl:table-column"></TableCell>
-                                    <TableCell className="hidden xl:table-column">
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                                    </TableCell>
-                                    <TableCell className="text-right">2025-03-23</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>
-                                        <div className="font-medium">
-                                            <Link href="#">John Doe</Link>
-                                        </div>
-                                        <div className="hidden text-sm text-muted-foreground md:inline tajawal">
-                                            Anniversary Reminder
-                                        </div>
-                                    </TableCell>
-                                    <TableCell className="hidden xl:table-column"></TableCell>
-                                    <TableCell className="hidden xl:table-column">
-                                    </TableCell>
-                                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                                    </TableCell>
-                                    <TableCell className="text-right">2025-06-13</TableCell>
-                                </TableRow> */}
                             </TableBody>
                         </Table>
                     )
