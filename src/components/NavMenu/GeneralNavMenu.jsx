@@ -16,26 +16,26 @@ import {
 const reminders = [
     {
         title: "Birthday Reminder",
-        href: "/reminders/birthday-reminder",
+        href: "/dashboard/reminders/create",
         description:
-            "A modal dialog that interrupts the user with important content and expects a response.",
+            "Create a new reminder for birthdays of your loved ones.",
     },
     {
         title: "Anniversary Reminder",
-        href: "/reminders/marriage-anniversary-reminder",
+        href: "/dashboard/reminders/create",
         description:
-            "For sighted users to preview content available behind a link.",
+            "Create a new reminder for anniversaries of your loved ones.",
     },
     {
         title: "Event Reminder",
-        href: "/reminders/event-reminder",
+        href: "/dashboard/reminders/create",
         description:
-            "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+            "Create a new reminder for any special event or occasion.",
     },
     {
         title: "Important Reminder",
-        href: "/reminders/important-reminder",
-        description: "Visually or semantically separates content.",
+        href: "/dashboard/reminders/create",
+        description: "Create a new reminder for important tasks or deadlines.",
     }
 ]
 
