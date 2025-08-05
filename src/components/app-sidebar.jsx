@@ -1,6 +1,7 @@
+'use client'
+
 import { FaHome, FaPlus, FaBell } from "react-icons/fa";
 import { VersionSwitcher } from "@/components/version-switcher"
-import { currentUser } from '@clerk/nextjs/server'
 import {
   Sidebar,
   SidebarContent,
@@ -13,9 +14,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link";
 import LogOut from "./Footer/LogOut";
+import { useUser } from "@clerk/nextjs";
+import { use, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const menuData = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
@@ -65,11 +70,20 @@ const menuData = {
   ],
 }
 
-export async function AppSidebar({
+export function AppSidebar({
   ...props
 }) {
-  const user = await currentUser();
-  const { profileImageUrl, username } = user;
+
+  const { setOpenMobile } = useSidebar();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpenMobile(false);
+  }, [pathname, setOpenMobile]);
+
+  // Fetch user data from Clerk
+  const { user } = useUser();
+
   return (
     (<Sidebar {...props} className="border-0 pt-2 ps-2">
       <div className="md:border md:rounded-xl h-full flex flex-col justify-between gap-10">
@@ -107,14 +121,14 @@ export async function AppSidebar({
         <SidebarFooter className="pb-4">
           <div className="flex items-center gap-4">
             <div className={"flex items-center justify-center brand-bg text-white font-bold w-12 h-12 rounded-full"}>
-              {profileImageUrl ? (
-                <img src={profileImageUrl} alt="profile" className="w-full h-full object-cover rounded-full" />
+              {user?.imageUrl ? (
+                <img src={user?.imageUrl} alt="profile" className="w-full h-full object-cover rounded-full" />
               ) : (
-                <span className="text-lg">{username ? username[0] : "P"}</span>
+                <span className="text-lg">{user?.username ? user?.username[0] : "P"}</span>
               )}
             </div>
             <div className="flex flex-col gap-2 flex-nowrap">
-              <p className="text-sm font-medium leading-none">{username}</p>
+              <p className="text-sm font-medium leading-none">{user?.username}</p>
               <LogOut />
             </div>
           </div>
