@@ -15,22 +15,34 @@ import { useToast } from "@/hooks/use-toast";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { CalendarIcon, Plus } from "lucide-react";
+import { CalendarIcon, Plus, Sparkles } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Bars } from "react-loader-spinner";
 
 const CreateReminderCard = () => {
-
     const { toast } = useToast();
     const [notification, setNotification] = useState({});
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    // Form state
     const { register, setValue, watch, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(reminderSchema),
     });
 
+    // notification open state
+    const [open, setOpen] = useState(false);
+
+    // Handle notification deletion
+    const handleNotificationDelete = (index) => {
+        const updatedNotifications = notifications.filter((_, i)=> i!==index)
+        setNotifications(updatedNotifications);
+        toast({
+            description: "Notification deleted.",
+            variant: "destructive"
+        });
+    }
     const saveNotification = () => {
         if (!notification.date || !notification.notification_type || !notification.message) {
             toast({
@@ -48,6 +60,7 @@ const CreateReminderCard = () => {
             };
             setNotifications([...notifications, finalNotification]);
             setNotification({});
+            setOpen(false);
             toast({
                 description: "Notification added successfully.",
             })
@@ -139,10 +152,10 @@ const CreateReminderCard = () => {
                                                 <SelectContent>
                                                     <SelectGroup>
                                                         <SelectLabel>Reminder Types</SelectLabel>
-                                                        <SelectItem value="birthday">Birthday</SelectItem>
+                                                        <SelectItem selected value="birthday">Birthday</SelectItem>
                                                         <SelectItem value="anniversary">Anniversary</SelectItem>
                                                         <SelectItem value="event">Event</SelectItem>
-                                                        <SelectItem value="other">Other</SelectItem>
+                                                        <SelectItem disabled value="other">Other</SelectItem>
                                                     </SelectGroup>
                                                 </SelectContent>
                                             </Select>
@@ -191,14 +204,14 @@ const CreateReminderCard = () => {
                                                 <SelectContent>
                                                     <SelectGroup>
                                                         <SelectLabel>Status</SelectLabel>
-                                                        <SelectItem value="enabled">Enabled</SelectItem>
+                                                        <SelectItem selected value="enabled">Enabled</SelectItem>
                                                         <SelectItem value="disabled">Disabled</SelectItem>
                                                     </SelectGroup>
                                                 </SelectContent>
                                             </Select>
                                         </div>
                                         <div className="w-full">
-                                            <Popover>
+                                            <Popover open={open} onOpenChange={setOpen}>
                                                 <PopoverTrigger asChild>
                                                     <Button variant="outline">Add Notification <Plus /></Button>
                                                 </PopoverTrigger>
@@ -224,8 +237,8 @@ const CreateReminderCard = () => {
                                                                         <SelectGroup>
                                                                             <SelectLabel>Type</SelectLabel>
                                                                             <SelectItem value="email">Email</SelectItem>
-                                                                            <SelectItem value="sms">SMS</SelectItem>
-                                                                            <SelectItem value="push">Push Notifiction</SelectItem>
+                                                                            <SelectItem disabled value="sms">SMS</SelectItem>
+                                                                            <SelectItem disabled value="push">Push Notifiction</SelectItem>
                                                                         </SelectGroup>
                                                                     </SelectContent>
                                                                 </Select>
@@ -276,7 +289,15 @@ const CreateReminderCard = () => {
                                             {notifications.length > 0 && notifications.map((notif, index) => (
                                                 <Card key={index} className="mb-4 pt-5">
                                                     <CardContent>
-                                                        <h4 className="text-muted-foreground mb-4">Notification {index + 1}</h4>
+                                                        <div className="flex justify-between items-center mb-4">
+                                                            <h4 className="text-muted-foreground mb-4">Notification {index + 1}</h4>
+                                                            <Button 
+                                                            size="sm" 
+                                                            variant="destructive" 
+                                                            className="btn-sm"
+                                                            onClick={(e)=> handleNotificationDelete(index)}
+                                                            >Delete</Button>
+                                                        </div>
                                                         <div className="flex flex-col gap-2">
                                                             <div className="flex justify-between">
                                                                 <Label>Type:</Label>
@@ -306,7 +327,9 @@ const CreateReminderCard = () => {
                     }
                 </CardContent>
                 <CardFooter>
-                    <Button onClick={(e) => handleFormSubmit(e)} variant="outline">Submit</Button>
+                    <Button onClick={(e) => handleFormSubmit(e)} variant="outline">Create 
+                        <Sparkles className="mr-2 h-4 w-4 text-[#45dfb1] drop-shadow-[0_0_4px_#45dfb1]" />
+                    </Button>
                 </CardFooter>
             </Card>
         </div>
