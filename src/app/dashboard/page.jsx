@@ -2,6 +2,18 @@ import OverviewStats from "@/components/Dashboard/Overview/OverviewStats";
 import RemindersCalenderView from "@/components/Dashboard/Overview/RemindersCalenderView";
 import UpcomingReminders from "@/components/Dashboard/Overview/UpcomingReminders";
 
+export const metadata = {
+  title: "Dashboard - Memory Mate | Manage Your Reminders",
+  description: "Access your Memory Mate dashboard to view upcoming reminders, manage birthdays, anniversaries, and special events. Stay organized and never miss important dates.",
+  keywords: ['dashboard', 'reminders', 'manage reminders', 'upcoming events', 'birthday reminders', 'anniversary reminders'],
+  openGraph: {
+    title: "Dashboard - Memory Mate | Manage Your Reminders",
+    description: "Access your Memory Mate dashboard to view upcoming reminders, manage birthdays, anniversaries, and special events. Stay organized and never miss important dates.",
+    url: 'https://mate.fabbythemes.com/dashboard',
+    type: 'website',
+  },
+};
+
 const Dashboard = () => {
     return (
         <div>
