@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mate.fabbythemes.com/sitemap.xml
+
+# Disallow API routes (private data)
+Disallow: /api/
+
+# Allow dashboard routes (protected but discoverable)
+Allow: /dashboard
+Allow: /dashboard/reminders/create
+
+# Allow important public pages
+Allow: /contact
+Allow: /login
+Allow: /sign-up
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1 

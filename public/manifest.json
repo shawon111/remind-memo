@@ -1,0 +1,19 @@
+{
+  "name": "Memory Mate - Your Reminder App",
+  "short_name": "Memory Mate",
+  "description": "Your ultimate reminder app for birthdays, anniversaries, and special events. Stay organized and never miss a moment that matters!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#45dfb1",
+  "icons": [
+    {
+      "src": "/memory-mate-og-img.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+} 

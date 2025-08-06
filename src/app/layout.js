@@ -10,6 +10,21 @@ export const metadata = {
   keywords: ['Memory Mate', 'Reminder app', 'Birthday reminders', "Anniversary reminders", "Event reminders", "Never forget important dates", "Personal reminder app", "Timely notifications"],
   creator: 'Shawon Ahmmed',
   publisher: 'Shawon Ahmmed',
+  manifest: '/manifest.json',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code', // Add your Google Search Console verification code
+  },
   openGraph: {
     title: "Memory Mate - Your Reminder App for Birthdays, Anniversaries & More!",
     description: "Your ultimate reminder app for birthdays, anniversaries, and special events. Stay organized and never miss a moment that matters!",
@@ -51,6 +66,35 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "Memory Mate",
+                "description": "Your ultimate reminder app for birthdays, anniversaries, and special events. Stay organized and never miss a moment that matters!",
+                "url": "https://mate.fabbythemes.com",
+                "applicationCategory": "ProductivityApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                },
+                "author": {
+                  "@type": "Person",
+                  "name": "Shawon Ahmmed"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Memory Mate"
+                }
+              })
+            }}
+          />
+        </head>
         <body className={`${tajawal.className} ${spaceGrotesk.className}`} >
           <Toaster />
           {children}
