@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { useToast } from "@/hooks/use-toast";
@@ -28,8 +28,12 @@ const ProcessSignUp = () => {
                     description: "Please try again by clicking the button",
                 })
             }
+            await user.reload();
 
-            console.log("Private metadata updated.");
+            toast({
+                title: "Account Completed!",
+            });
+
             router.push("/dashboard");
         } catch (err) {
             setIsUpdating(false);
@@ -40,21 +44,18 @@ const ProcessSignUp = () => {
             })
         } finally {
             setIsUpdating(false);
-            toast({
-                title: "Account Completed!",
-            })
         }
     };
     return (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            {isUpdating && <p>Please wait while we finalize your account setup.</p>}
-            <h2 className="text-4xl brand-text mb-[100px]">Finalize Your Account</h2>
+            {isUpdating && <p>Please wait while we confirm your account setup.</p>}
+            <h2 className="text-4xl brand-text mb-[100px]">Confirm Your Account</h2>
             <button
                 onClick={() => updateMetadata()}
                 className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
             >
                 {
-                    isUpdating ? "Finalizing..." : "Finalize Account"
+                    isUpdating ? "Confirming..." : "Confirm Account"
                 }
             </button>
         </div>

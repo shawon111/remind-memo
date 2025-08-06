@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 
-// get reminder by data
+// get reminder by date
 export const GET = async(req)=> {
  try {
         const { userId } = await auth();
@@ -10,7 +10,6 @@ export const GET = async(req)=> {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
         const { searchParams } = new URL(req.url);
-        console.log("searchParams", searchParams);
         const date = searchParams.get('date');
         if (!date) {
             return NextResponse.json({ error: "Date is required" }, { status: 400 });

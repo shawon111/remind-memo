@@ -25,9 +25,9 @@ const CreateReminderContainer = async () => {
                 <h2 className="text-center mb-6 text-[30px] md:text-[36px] font-bold">Create Your Reminder</h2>
                 {
                     limit && limit > 0 ? <CreateReminderCard /> : <div>
-                        <p className="text-center">Please finalize your account to create reminders</p>
+                        <p className="text-center">Please confirm your account to create reminders</p>
                         <div className="flex justify-center mt-4">
-                            <Link href="/process-signup"><Button>Finalize</Button></Link>
+                            <Link href="/process-signup"><Button>Confirm</Button></Link>
                         </div>
                     </div>
                 }
