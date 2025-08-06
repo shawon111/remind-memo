@@ -22,9 +22,6 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code', // Add your Google Search Console verification code
-  },
   openGraph: {
     title: "Memory Mate - Your Reminder App for Birthdays, Anniversaries & More!",
     description: "Your ultimate reminder app for birthdays, anniversaries, and special events. Stay organized and never miss a moment that matters!",
