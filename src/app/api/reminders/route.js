@@ -11,6 +11,27 @@ export const POST = async (req) => {
     }
     try {
         const user = await currentUser();
+        if (!user) {
+            return NextResponse.json(
+                { error: "User not found" },
+                { status: 404 }
+            );
+        }
+
+        // limit handling
+        const metadata = user.privateMetadata || {};
+
+        const limit = metadata.limit ?? 15;
+        const availableReminder = metadata.availableReminder ?? limit;
+
+        // Block if limit reached
+        if (availableReminder <= 0) {
+            return NextResponse.json(
+                { error: "Reminder limit reached" },
+                { status: 403 }
+            );
+        }
+
         const reminderData = await req.json();
         const { event_date, reminder_type, reminder_title, description, how_to_celebrate, is_recurring, status, notifications } = reminderData;
         const finalData = {
@@ -41,11 +62,9 @@ export const POST = async (req) => {
         // Decrease availableReminder by 1
         await client.users.updateUser(userId, {
             privateMetadata: {
-                ...user.privateMetadata,
-                availableReminder: Math.max(
-                    (user.privateMetadata?.availableReminder ?? 15) - 1,
-                    0
-                ),
+                ...metadata,
+                limit,
+                availableReminder: Math.max(availableReminder - 1, 0),
             },
         });
 
