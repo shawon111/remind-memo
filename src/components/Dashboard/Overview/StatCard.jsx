@@ -12,7 +12,7 @@ export default function StatCard({data}) {
       <CardHeader className="pb-6">
         <CardDescription className="tajawal">{title}</CardDescription>
         {
-          limit? <CardTitle className="text-4xl">{count}<span className="text-base brand-text"> / {limit}</span></CardTitle> : <CardTitle className="text-4xl">{count}</CardTitle>
+          limit? <CardTitle className="text-4xl">{count}<span className="text-base brand-text"> / {limit}</span></CardTitle> : <CardTitle className="text-4xl">15<span className="text-base brand-text"> / 15</span></CardTitle>
         }
       </CardHeader>
     </Card>
